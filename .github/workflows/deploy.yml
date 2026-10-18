@@ -3,15 +3,25 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - main # Укажите master, если ваша главная ветка называется так
+      - main
+  workflow_dispatch:
 
-# Разрешаем скрипту перезаписывать содержимое GitHub Pages
 permissions:
-  contents: write
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
       - name: Checkout repository
@@ -20,8 +30,8 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-level: 20 # Или другая версия Node.js, которую вы используете
-          cache: 'npm'
+          node-version: 22
+          cache: npm
 
       - name: Install dependencies
         run: npm ci
@@ -29,8 +39,11 @@ jobs:
       - name: Build project
         run: npm run build
 
-      - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@v4
+      - name: Upload build
+        uses: actions/upload-pages-artifact@v3
         with:
-          folder: dist # Папка, куда Vite собирает готовый проект
-          branch: gh-pages # Ветка, куда отправятся файлы для сайта
+          path: ./dist
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
