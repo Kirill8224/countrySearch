@@ -1,7 +1,8 @@
-import type { CityData } from "../types";
+import { useAppSelector, type CityData } from "../types";
 import { Card, Typography } from "@mui/material";
 
-export function CitysGet({citys}: {citys: CityData[]}){
+export function CitysGet(){
+    const citys: CityData[]= useAppSelector((state)=>{return state.citiesState.data.data})
     return(citys.map((city)=>{return(
         <Card sx={{m: 1}} key={city.id}>
             <Typography variant="h2">{city.name}</Typography>

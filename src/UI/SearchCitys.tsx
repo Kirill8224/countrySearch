@@ -1,21 +1,19 @@
 import { useState } from "react"
 import { TextField, Button } from "@mui/material"
-import type { CityData } from "../types"
-import { searchCity } from "../API/SearchCity"
-import type { AnswerSearch } from "../types"
+import {searchFetch} from '../redux'
 import { CitysGet } from "./City"
+import { useAppDispatch } from "../types"
 
 export function SearchCitys(){
+    const dispatch= useAppDispatch()
     const [nameCity,  setNameCity]= useState<string>('')
-    const [citys,  setCitys]= useState<CityData[]>([])
+    const [click,  setClick]= useState<boolean>(false)
     async function getCitys(){
-        const answer: AnswerSearch= await searchCity(nameCity)
-        console.log(answer)
-        setCitys(answer.data.data)
-    }
+        await dispatch(searchFetch(nameCity))
+        setClick(true)}
     return(<>
     <TextField onChange={(e)=>{setNameCity(e.target.value)}} sx={{m: 1}} label="название города" placeholder="пример: Belgorod" />
     <Button onClick={()=>{getCitys()}} variant="contained" color="success">искать город</Button>
-    {citys && <CitysGet citys= {citys}/>}
+    {click && <CitysGet />}
     </>)
 }

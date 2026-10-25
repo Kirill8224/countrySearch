@@ -1,3 +1,8 @@
+import { useSelector, useDispatch } from "react-redux";
+import type { RootState, DispathType } from "./API/store";
+export const useAppDispatch= useDispatch.withTypes<DispathType>()
+export const useAppSelector= useSelector.withTypes<RootState>()
+
 export type  CityData ={
     alternate_names: {
       ru: string;
