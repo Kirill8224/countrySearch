@@ -2,8 +2,11 @@ import { createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import type { AnswerSearch } from "./types";
 import { searchCity } from "./API/SearchCity";
 
-const initialState: AnswerSearch= {data: {
-    data: []}}
+const initialState: AnswerSearch= {
+    data: [],
+    loading: false,
+    error: false
+}
 
 export const searchFetch= createAsyncThunk<AnswerSearch, string>(
     'citys', 
@@ -20,8 +23,18 @@ export const citySlices= createSlice({
         builder.addCase(searchFetch.fulfilled, 
             (state, action)=>{
                 state.data= action.payload.data
+                state.error= false
+                state.loading= false
             }
         )
+        builder.addCase(searchFetch.pending, (state)=>{
+            state.loading= true
+            state.error= false
+        })
+        builder.addCase(searchFetch.rejected, (state)=>{
+            state.error= true
+            state.loading= false
+        })
     },
     reducers: {
     }

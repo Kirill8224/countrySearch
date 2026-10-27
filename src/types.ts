@@ -20,7 +20,7 @@ export type  CityData ={
   }
   
 export type AnswerSearch= {
-    data: {
-        data: CityData[]
-    }
+    data: CityData[]
+    loading?: boolean,
+    error?: boolean
 }

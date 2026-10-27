@@ -5,6 +5,6 @@ export async function searchCity(city: string){
         params: {
             search: city
         }})
-    return(res)
+    return(res.data)
 }
 
