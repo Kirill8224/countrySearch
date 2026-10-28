@@ -21,6 +21,14 @@ export type  CityData ={
   
 export type AnswerSearch= {
     data: CityData[]
-    loading?: boolean,
-    error?: boolean
+    loading: boolean,
+    error: boolean,
+    searched: boolean
+}
+
+export type AnswerResponse= {
+  data: CityData[],
+  meta:{ 
+    count: number,
+    has_more: boolean}
 }
