@@ -1,11 +1,11 @@
-import './App.css'
-import { SearchCitys } from './UI/SearchCitys'
+import "./App.css";
+import { SearchCitys } from "./UI/SearchCitys";
 function App() {
   return (
     <>
-      <SearchCitys/>
+      <SearchCitys />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
