@@ -20,10 +20,11 @@ export type  CityData ={
   }
   
 export type AnswerSearch= {
-    data: CityData[]
+    data: CityData[],
+    status: {
     loading: boolean,
     error: boolean,
-    searched: boolean
+    searched: boolean}
 }
 
 export type AnswerResponse= {

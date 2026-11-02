@@ -7,9 +7,9 @@ import { useAppDispatch, useAppSelector } from "../types";
 export function SearchCitys() {
   const dispatch = useAppDispatch();
   const [nameCity, setNameCity] = useState<string>("");
-  const loading = useAppSelector((state) => state.citiesState.loading);
-  const error = useAppSelector((state) => state.citiesState.error);
-  const searched = useAppSelector((state) => state.citiesState.searched);
+  const loading = useAppSelector((state) => state.citiesState.status.loading);
+  const error = useAppSelector((state) => state.citiesState.status.error);
+  const searched = useAppSelector((state) => state.citiesState.status.searched);
   async function getCitys() {
     await dispatch(searchFetch(nameCity));
   }
