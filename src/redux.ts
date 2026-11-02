@@ -3,12 +3,15 @@ import type { AnswerSearch } from "./types";
 import { searchCity } from "./API/SearchCity";
 import type { AnswerResponse } from "./types";
 
+
 const initialState: AnswerSearch= {
     data: [],
+    status: {
     loading: false,
     error: false,
-    searched: false
+    searched: false}
 }
+
 
 export const searchFetch= createAsyncThunk<AnswerResponse, string>(
     'citys', 
@@ -25,20 +28,20 @@ export const citySlices= createSlice({
         builder.addCase(searchFetch.fulfilled, 
             (state, action)=>{
                 state.data= action.payload.data
-                state.error= false
-                state.loading= false
-                state.searched= true
+                state.status.error= false
+                state.status.loading= false
+                state.status.searched= true
             }
         )
         builder.addCase(searchFetch.pending, (state)=>{
-            state.loading= true
-            state.error= false
-            state.searched= false
+            state.status.loading= true
+            state.status.error= false
+            state.status.searched= false
         })
         builder.addCase(searchFetch.rejected, (state)=>{
-            state.error= true
-            state.loading= false
-            state.searched= false
+            state.status.error= true
+            state.status.loading= false
+            state.status.searched= false
         })
     },
     reducers: {
