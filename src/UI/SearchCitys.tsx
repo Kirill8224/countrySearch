@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { TextField, Button } from "@mui/material";
 import { searchFetch } from "../redux";
-import { CitysGet } from "./City";
+import { CitysGet } from "./Citys";
 import { useAppDispatch, useAppSelector } from "../types";
 
 export function SearchCitys() {
@@ -24,7 +24,7 @@ export function SearchCitys() {
         placeholder="пример: Belgorod"
       />
       <Button
-        onClick={() => {
+        onClick={() => { 
           getCitys();
         }}
         variant="contained"
@@ -38,3 +38,4 @@ export function SearchCitys() {
     </>
   );
 }
+

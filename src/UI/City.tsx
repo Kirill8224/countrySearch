@@ -1,20 +1,12 @@
-import { useAppSelector, type CityData } from "../types";
+import type { CityData } from "../types";
 import { Card, Typography } from "@mui/material";
-
-export function CitysGet(){
-    const citys: CityData[]= useAppSelector((state)=>{return state.citiesState.data})
-    if(citys.length >= 1){
-    return(citys.map((city)=>{return(
-        <Card sx={{m: 1}} key={city.id}>
-            <Typography variant="h2">{city.name}</Typography>
-            <Typography>страна: {city.country_code}</Typography>
-            <Typography>население: {city.population}</Typography>
-            <Typography>регион: {city.timezone_id}</Typography>
-            <Typography>{city.latitude} {city.longitude}</Typography>
-        </Card>
-    )
-    }))}
-    else{
-        return <h1>городов с похожим названием не найдено</h1>
-    }
+export const SetCity= ({city}: {city: CityData})=>{
+    return(<Card sx={{m: 1}} key={city.id}>
+        <Typography variant="h2">{city.name}</Typography>
+        <Typography>страна: {city.country_code}</Typography>
+        <Typography>население: {city.population}</Typography>
+        <Typography>регион: {city.timezone_id}</Typography>
+        <Typography>{city.latitude} {city.longitude}</Typography>
+    </Card>)
 }
+
