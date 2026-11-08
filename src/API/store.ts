@@ -1,10 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { citySlices } from "../redux";
-export const state= configureStore({
+import cityRedux from "../redux";
+export const store= configureStore({
     reducer: {
-        citiesState: citySlices.reducer
+        citiesState: cityRedux
     }}
 )
-export type RootState= ReturnType<typeof state.getState>
-export type DispathType= typeof state.dispatch
+export type RootState= ReturnType<typeof store.getState>
+export type AppDispath= typeof store.dispatch
 
