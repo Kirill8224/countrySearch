@@ -38,7 +38,6 @@ export const citySlices= createAppSlice({
     })
 })
 
-
 export default citySlices.reducer
 export const {searchFetch}= citySlices.actions
 
