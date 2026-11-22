@@ -9,10 +9,6 @@ export function CitysGet(){
     const [million, setMillion]= useState<boolean>(false)
     const bigCity= millionPlusCity(citys)
     console.log(bigCity)
-    const errorMessage: string | null= useAppSelector((state)=>state.citiesState.status.errorMessage)
-    if(errorMessage){
-        return(<h1>{errorMessage}</h1>)
-    }
     if(citys.length >= 1){
     return(<div>
         <Button onClick={()=>{setMillion(true)}}>города-миллионники</Button>

@@ -8,8 +8,8 @@ export function SearchCitys() {
   const dispatch = useAppDispatch();
   const [nameCity, setNameCity] = useState<string>("");
   const loading = useAppSelector((state) => state.citiesState.status.loading);
-  const error = useAppSelector((state) => state.citiesState.status.error);
   const searched = useAppSelector((state) => state.citiesState.status.searched);
+  const errorMessage: string | null= useAppSelector((state)=>state.citiesState.status.errorMessage)
   async function getCitys() {
     await dispatch(searchFetch(nameCity));
   }
@@ -33,7 +33,7 @@ export function SearchCitys() {
         искать город
       </Button>
       {searched && <CitysGet />}
-      {error && <h1 style={{ color: "red" }}>ошибка</h1>}
+      {errorMessage && <h1 style={{ color: "red" }}>{errorMessage}</h1>}
       {loading && <h1>загрузка</h1>}
     </>
   );

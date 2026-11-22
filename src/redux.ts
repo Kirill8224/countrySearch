@@ -28,12 +28,15 @@ export const citySlices= createAppSlice({
                 pending: (state)=> {            
                     state.status.loading= true
                     state.status.error= false
-                    state.status.searched= false},
+                    state.status.searched= false
+                    state.status.errorMessage= null},
                 fulfilled : (state, action)=> {
                     state.data= action.payload.data
                     state.status.error= false
                     state.status.loading= false
-                    state.status.searched= true},
+                    state.status.searched= true
+                    state.status.errorMessage= null
+                },
                 rejected : (state, action)=> { 
                     state.status.error= true
                     state.status.loading= false
