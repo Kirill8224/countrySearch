@@ -24,7 +24,8 @@ export type AnswerSearch= {
     status: {
     loading: boolean,
     error: boolean,
-    searched: boolean}
+    searched: boolean,
+    errorMessage: string | null}
 }
 
 export type AnswerResponse= {

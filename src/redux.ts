@@ -1,24 +1,29 @@
 import type { AnswerSearch } from "./types";
 import { searchCity } from "./API/SearchCity";
 import { createAppSlice } from "./createAppSlice";
-
+ 
 
 const initialState: AnswerSearch= {
     data: [],
     status: {
     loading: false,
     error: false,
-    searched: false}
+    searched: false,
+    errorMessage: null}
 }
 
 export const citySlices= createAppSlice({
     name: 'reduxSlices',
     initialState,
     reducers: (create)=> ({
-        searchFetch: create.asyncThunk(
-            async (nameCity: string)=>{
+        searchFetch: create.asyncThunk.withTypes<{rejectValue: string}>()(
+            async (nameCity: string, thunkApi)=>{
+                try {
                 const answer= await searchCity(nameCity)
                 return answer
+                } catch {
+                    return(thunkApi.rejectWithValue('ошибка получения городов с сервера'))
+                }
             }, {
                 pending: (state)=> {            
                     state.status.loading= true
@@ -29,10 +34,12 @@ export const citySlices= createAppSlice({
                     state.status.error= false
                     state.status.loading= false
                     state.status.searched= true},
-                rejected : (state)=> { 
+                rejected : (state, action)=> { 
                     state.status.error= true
                     state.status.loading= false
-                    state.status.searched= false}
+                    state.status.searched= false
+                    state.status.errorMessage ?? action.payload
+                }
             }
         )
     })
