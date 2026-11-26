@@ -33,15 +33,16 @@ export const citySlices= createAppSlice({
                 fulfilled : (state, action)=> {
                     state.data= action.payload.data
                     state.status.error= false
-                    state.status.loading= false
                     state.status.searched= true
                     state.status.errorMessage= null
                 },
                 rejected : (state, action)=> { 
                     state.status.error= true
-                    state.status.loading= false
                     state.status.searched= false
                     state.status.errorMessage ?? action.payload
+                },
+                settled: (state)=>{
+                    state.status.loading= false
                 }
             }
         )
